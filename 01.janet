@@ -1,8 +1,24 @@
 (use ./prelude)
 
-(def input @[[3 4 2 1 3 3] [4 3 5 3 9 3]])
+(def grammar ~{
+  :main (split "\n" (group :line))
+	:line (* (number :d+) :s+ (number :d+))
+})
+
+# parse the input stream into the lists -- left and right
+(def input 
+	(->> (string/trim (file/read stdin :all))
+		(peg/match grammar)
+		(apply map tuple)
+		(map sorted)))
 
 # part 1
+# calculate the sum of distances (absolute value of differences)
+(->> input
+		(apply map -)
+		(map math/abs)
+		(reduce + 0)
+		(debug))
 
 # part 2
 
