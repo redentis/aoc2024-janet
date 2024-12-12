@@ -1,4 +1,4 @@
-(defn debug [v] (printf "%m" v))
+(defn pp [v] (printf "%m" v))
 
 (defn- partition-slice
   [f n ind step]
